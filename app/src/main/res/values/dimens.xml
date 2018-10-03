@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textEditSize">50dp</dimen>
+    <dimen name="radiusForRoundedTextEdits">25dp</dimen>
+    <dimen name="RoundedImgSize">128dp</dimen>
+    <dimen name="radiusForRoundedImg">64dp</dimen>
+</resources>

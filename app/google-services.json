@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "449886349363",
+    "firebase_url": "https://mymessenger-86c1b.firebaseio.com",
+    "project_id": "mymessenger-86c1b",
+    "storage_bucket": "mymessenger-86c1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449886349363:android:c0c0f8db8192dcfe",
+        "android_client_info": {
+          "package_name": "pl.kzsobolewski.mymessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449886349363-u0mad03rt5ete8jmiffpdo5vh09m440a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVDeF44kkxzq9PZEXU3HPf9Y_1qqCDJ68"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

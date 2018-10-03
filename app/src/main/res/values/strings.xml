@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyMessenger</string>
+    <string name="register_debug_name">RegisterActivityDebug</string>
+</resources>

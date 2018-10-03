@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@drawable/background_gradient"
+    >
+
+    <EditText
+        android:id="@+id/username_editText_register"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/textEditSize"
+        android:layout_marginEnd="56dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint=" Username"
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/email_editText_register"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/textEditSize"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint=" Email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/username_editText_register"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/username_editText_register"
+        app:layout_constraintTop_toBottomOf="@+id/username_editText_register" />
+
+    <EditText
+        android:id="@+id/passwordConfirm_editText_register"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/textEditSize"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint=" Retype password"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/password_editText_register"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/password_editText_register"
+        app:layout_constraintTop_toBottomOf="@+id/password_editText_register" />
+
+    <EditText
+        android:id="@+id/password_editText_register"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/textEditSize"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint=" Password"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
+        android:textAlignment="textStart"
+        app:layout_constraintEnd_toEndOf="@+id/email_editText_register"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/email_editText_register"
+        app:layout_constraintTop_toBottomOf="@+id/email_editText_register" />
+
+    <CheckBox
+        android:id="@+id/terms_checkBox_register"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/textEditSize"
+        android:layout_marginTop="16dp"
+        android:text="I accept the terms and conditions."
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/passwordConfirm_editText_register"
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirm_editText_register"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirm_editText_register" />
+
+    <Button
+        android:id="@+id/register_button_register"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/textEditSize"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="@+id/passwordConfirm_editText_register"
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirm_editText_register"
+        app:layout_constraintTop_toBottomOf="@+id/terms_checkBox_register" />
+
+    <TextView
+        android:id="@+id/alreadyHaveAcc_textView_register"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Already have an account?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/register_button_register"
+        app:layout_constraintStart_toStartOf="@+id/register_button_register"
+        app:layout_constraintTop_toBottomOf="@+id/register_button_register"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <Button
+        android:id="@+id/img_button_register"
+        android:layout_width="@dimen/RoundedImgSize"
+        android:layout_height="@dimen/RoundedImgSize"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_img"
+        android:elevation="8dp"
+        android:text="SELECT PHOTO"
+        app:layout_constraintBottom_toTopOf="@+id/username_editText_register"
+        app:layout_constraintEnd_toEndOf="@+id/username_editText_register"
+        app:layout_constraintStart_toStartOf="@+id/username_editText_register"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/selectedphoto_imageview_register"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        app:civ_border_color="@color/img_border_color"
+        app:civ_border_width="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_button_register"
+        app:layout_constraintEnd_toEndOf="@+id/img_button_register"
+        app:layout_constraintStart_toStartOf="@+id/img_button_register"
+        app:layout_constraintTop_toTopOf="@+id/img_button_register" />
+
+</android.support.constraint.ConstraintLayout>
