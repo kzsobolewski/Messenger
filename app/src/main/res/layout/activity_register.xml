@@ -122,7 +122,8 @@
         app:layout_constraintStart_toStartOf="@+id/username_editText_register"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/selectedphoto_imageview_register"
         android:layout_width="128dp"
         android:layout_height="128dp"

@@ -2,7 +2,6 @@ package pl.kzsobolewski.mymessenger
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_register.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import pl.kzsobolewski.mymessenger.R.id.*
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -103,6 +101,9 @@ class RegisterActivity : AppCompatActivity() {
                     Log.d("RegisterActivity", "Successfully created the user with uid: " + it.result.user.uid)
 
                     uploadImageToFirebase()
+                    val intent = Intent(this, LatestMessegesActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 }
                 .addOnFailureListener{
                     Toast.makeText(this, it.message,Toast.LENGTH_LONG).show()
@@ -136,17 +137,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun saveUserToFirebaseDatabase(profileImageUrl: String){
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/user/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
         val user = User(uid, username_editText_register.text.toString(), profileImageUrl )
 
         ref.setValue(user)
                 .addOnSuccessListener {
                     Log.d("RegisterActivity", "FB: Successfully added user.")
-                    val intent = Intent(this, LatestMessegesActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-
                 }
                 .addOnFailureListener {
                     Log.d("RegisterActivity", "FB: Adding user failed: " + it.message)
@@ -155,5 +152,5 @@ class RegisterActivity : AppCompatActivity() {
 }
 
 class User(val uid: String, val username: String, val profileImageUrl : String){
-
+    constructor() : this("","","")
 }
