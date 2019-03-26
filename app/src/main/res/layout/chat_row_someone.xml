@@ -8,7 +8,7 @@
    >
 
     <ImageView
-        android:id="@+id/avatar__chatrow"
+        android:id="@+id/avatar_chatrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -26,7 +26,7 @@
         android:background="@drawable/rounded_edittext"
         android:padding="@dimen/mtrl_bottomappbar_fab_cradle_rounded_corner_radius"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/avatar__chatrow"
-        app:layout_constraintStart_toEndOf="@+id/avatar__chatrow"
-        app:layout_constraintTop_toTopOf="@+id/avatar__chatrow" />
+        app:layout_constraintBottom_toBottomOf="@+id/avatar_chatrow"
+        app:layout_constraintStart_toEndOf="@+id/avatar_chatrow"
+        app:layout_constraintTop_toTopOf="@+id/avatar_chatrow" />
 </android.support.constraint.ConstraintLayout>
