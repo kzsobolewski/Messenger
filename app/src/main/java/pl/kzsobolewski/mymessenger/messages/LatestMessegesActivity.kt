@@ -1,12 +1,13 @@
-package pl.kzsobolewski.mymessenger
+package pl.kzsobolewski.mymessenger.messages
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageButton
 import com.google.firebase.auth.FirebaseAuth
+import pl.kzsobolewski.mymessenger.R
+import pl.kzsobolewski.mymessenger.logIn.RegisterActivity
 
 class LatestMessegesActivity : AppCompatActivity() {
 

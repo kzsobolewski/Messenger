@@ -1,10 +1,11 @@
-package pl.kzsobolewski.mymessenger
+package pl.kzsobolewski.mymessenger.logIn
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import pl.kzsobolewski.mymessenger.R
 
 
 class SignInActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package pl.kzsobolewski.mymessenger
+package pl.kzsobolewski.mymessenger.logIn
 
 import android.app.Activity
 import android.content.Intent
@@ -12,7 +12,10 @@ import kotlinx.android.synthetic.main.activity_register.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import pl.kzsobolewski.mymessenger.R
+import pl.kzsobolewski.mymessenger.messages.LatestMessegesActivity
 import java.util.*
+import pl.kzsobolewski.mymessenger.models.User
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -30,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
         alreadyHaveAcc_textView_register.setOnClickListener {
             Log.d(R.string.register_debug_name.toString().toString(), "clicking already have an account text")
 
-            // launching the SignInActivity
+            // launching the pl.kzsobolewski.mymessenger.logIn.SignInActivity
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
@@ -151,6 +154,3 @@ class RegisterActivity : AppCompatActivity() {
     }
 }
 
-class User(val uid: String, val username: String, val profileImageUrl : String){
-    constructor() : this("","","")
-}
