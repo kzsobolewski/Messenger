@@ -43,7 +43,8 @@ class ChatLogActivity : AppCompatActivity() {
     private fun listenForMessages() {
         val fromId = FirebaseAuth.getInstance().uid
         val toId = toUser?.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
+        val ref = FirebaseDatabase.getInstance()
+                .getReference("/user-messages/$fromId/$toId")
 
         ref.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
@@ -80,10 +81,13 @@ class ChatLogActivity : AppCompatActivity() {
         if(fromId == null) return
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val toId = user.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
-        val refOtherUser = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
+        val ref =
+                FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val refOtherUser =
+                FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
-        val message = Message(ref.key!!, text,  fromId, toId, System.currentTimeMillis() / 1000)
+        val message =
+                Message(ref.key!!, text,  fromId, toId, System.currentTimeMillis() / 1000)
         ref.setValue(message).addOnSuccessListener {
             Log.d(CHATLOG_TAG, "Saved our chat message " + ref.key)
             edittext_chatlog.text.clear()
