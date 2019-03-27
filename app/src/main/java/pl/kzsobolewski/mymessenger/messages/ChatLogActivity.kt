@@ -26,19 +26,14 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     val adapter = GroupAdapter<ViewHolder>()
+    var toUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
         messages_recyclerview_chatlog.adapter = adapter
-
-        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
-
-        supportActionBar?.title = user.username
-
-//        adapter.add(FromChatItem("elo"))
-//        adapter.add(FromChatItem("co tam"))
-//        adapter.add(YourChatItem("nic"))
+        toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        supportActionBar?.title = toUser?.username
         listenForMessages()
         send_button_chatlog.setOnClickListener{
             performSend()
@@ -46,7 +41,9 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = toUser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
 
         ref.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
@@ -56,8 +53,7 @@ class ChatLogActivity : AppCompatActivity() {
                     if (message.fromId == FirebaseAuth.getInstance().uid)
                         adapter.add(YourChatItem(message.text))
                     else {
-                        val toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
-                        adapter.add(SomeoneChatItem(message.text,toUser))
+                        adapter.add(SomeoneChatItem(message.text,toUser!!))
                     }
                 }
             }
@@ -84,14 +80,16 @@ class ChatLogActivity : AppCompatActivity() {
         if(fromId == null) return
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val toId = user.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val refOtherUser = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
         val message = Message(ref.key!!, text,  fromId, toId, System.currentTimeMillis() / 1000)
         ref.setValue(message).addOnSuccessListener {
             Log.d(CHATLOG_TAG, "Saved our chat message " + ref.key)
-        }.addOnFailureListener {
-
+            edittext_chatlog.text.clear()
+            messages_recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
         }
+        refOtherUser.setValue(message)
     }
 }
 
