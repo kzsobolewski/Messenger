@@ -51,6 +51,7 @@ class LatestMessegesActivity : AppCompatActivity() {
         adapter.add(LatestMessagesRow())
         adapter.add(LatestMessagesRow())
         adapter.add(LatestMessagesRow())
+        adapter.add(LatestMessagesRow())
         recyclerView_latest_messages.adapter = adapter
     }
 
