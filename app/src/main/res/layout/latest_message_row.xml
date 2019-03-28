@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/avatar_imageView_latest_messages_row"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"

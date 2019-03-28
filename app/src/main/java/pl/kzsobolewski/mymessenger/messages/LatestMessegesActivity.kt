@@ -3,11 +3,13 @@ package pl.kzsobolewski.mymessenger.messages
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -31,6 +33,12 @@ class LatestMessegesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messeges)
+        adapter.setOnItemClickListener { item, view ->
+            val intent = Intent(this, ChatLogActivity::class.java)
+            val row = item as LatestMessagesRow
+            intent.putExtra(NewMessageActivity.USER_KEY, row.otherUser)
+            startActivity(intent)
+        }
         listenForLatestMessages()
         fetchCurrentUser()
         verifyIfUserIsLogged()
@@ -53,23 +61,40 @@ class LatestMessegesActivity : AppCompatActivity() {
                 val message = p0.getValue(Message::class.java) ?: return
                 latestMessagesMap[p0.key!!] = message
                 refreshRecycler()
-                adapter.add(LatestMessagesRow(message))
-            }
+                }
             override fun onChildRemoved(p0: DataSnapshot) {}
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 val message = p0.getValue(Message::class.java) ?: return
                 latestMessagesMap[p0.key!!] = message
                 refreshRecycler()
-                adapter.add(LatestMessagesRow(message))
-            }
+                }
         })
         recyclerView_latest_messages.adapter = adapter
     }
 
     class LatestMessagesRow(val chatMessage: Message): Item<ViewHolder>() {
+        var otherUser: User? = null
+            private set
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.message_textView_latest_messages_row.text = chatMessage.text
 
+            val chatPartnerId: String
+            if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
+                chatPartnerId = chatMessage.toId
+            } else {
+                chatPartnerId = chatMessage.fromId
+            }
+            val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPartnerId")
+            ref.addListenerForSingleValueEvent( object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                }
+                override fun onDataChange(p0: DataSnapshot) {
+                    otherUser = p0.getValue(User::class.java)
+                    viewHolder.itemView.username_textView_latest_messages.text = otherUser?.username
+                    Picasso.get().load(otherUser?.profileImageUrl)
+                            .into(viewHolder.itemView.avatar_imageView_latest_messages_row)
+                }
+            })
         }
 
         override fun getLayout(): Int {
@@ -93,7 +118,6 @@ class LatestMessegesActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
         menuInflater.inflate(R.menu.nav_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }

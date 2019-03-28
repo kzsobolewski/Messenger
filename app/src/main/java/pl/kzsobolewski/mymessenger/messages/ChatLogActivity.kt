@@ -57,6 +57,8 @@ class ChatLogActivity : AppCompatActivity() {
                         adapter.add(SomeoneChatItem(message.text,toUser!!))
                     }
                 }
+
+                messages_recyclerview_chatlog.scrollToPosition(adapter.itemCount-1)
             }
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
