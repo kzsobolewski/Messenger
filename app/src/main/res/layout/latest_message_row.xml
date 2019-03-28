@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/avatar_imageView_latest_messages_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -23,20 +23,18 @@
         android:id="@+id/username_textView_latest_messages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
         android:text="username"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/avatar_imageView_latest_messages_row"
+        app:layout_constraintTop_toTopOf="@+id/avatar_imageView_latest_messages_row" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/message_textView_latest_messages_row"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="18dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text="message content"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/avatar_imageView_latest_messages_row"
         app:layout_constraintStart_toStartOf="@+id/username_textView_latest_messages"
         app:layout_constraintTop_toBottomOf="@+id/username_textView_latest_messages" />
 </android.support.constraint.ConstraintLayout>

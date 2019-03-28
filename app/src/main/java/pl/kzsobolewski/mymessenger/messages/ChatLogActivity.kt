@@ -77,8 +77,7 @@ class ChatLogActivity : AppCompatActivity() {
 
     private fun performSend() {
         val text = edittext_chatlog.text.toString()
-        val fromId = FirebaseAuth.getInstance().uid
-        if(fromId == null) return
+        val fromId = FirebaseAuth.getInstance().uid ?: return
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val toId = user.uid
         val ref =
@@ -94,6 +93,13 @@ class ChatLogActivity : AppCompatActivity() {
             messages_recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
         }
         refOtherUser.setValue(message)
+
+        val latestMessageRef = FirebaseDatabase.getInstance()
+                .getReference("/latest-messages/$fromId/$toId")
+        latestMessageRef.setValue(message)
+        val latestMessageRefOtherUser = FirebaseDatabase.getInstance()
+                .getReference("/latest-messages/$toId/$fromId")
+        latestMessageRefOtherUser.setValue(message)
     }
 }
 

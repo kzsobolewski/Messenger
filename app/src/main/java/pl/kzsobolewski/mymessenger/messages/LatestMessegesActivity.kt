@@ -7,17 +7,16 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_latest_messeges.*
 import kotlinx.android.synthetic.main.activity_new_message.*
+import kotlinx.android.synthetic.main.latest_message_row.view.*
 import pl.kzsobolewski.mymessenger.R
 import pl.kzsobolewski.mymessenger.logIn.RegisterActivity
+import pl.kzsobolewski.mymessenger.models.Message
 import pl.kzsobolewski.mymessenger.models.User
 
 class LatestMessegesActivity : AppCompatActivity() {
@@ -26,18 +25,51 @@ class LatestMessegesActivity : AppCompatActivity() {
         var currentUser: User? = null
         val LATEST_ACTIVITY_TAG = "LATEST_ACTIVITY_TAG"
     }
+        private val adapter = GroupAdapter<ViewHolder>()
+        private val latestMessagesMap = HashMap<String, Message>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messeges)
-        dummy()
+        listenForLatestMessages()
         fetchCurrentUser()
         verifyIfUserIsLogged()
-
     }
 
-    class LatestMessagesRow: Item<ViewHolder>() {
+    private fun refreshRecycler(){
+        adapter.clear()
+        latestMessagesMap.values.forEach {
+            adapter.add(LatestMessagesRow(it))
+        }
+    }
+
+    private fun listenForLatestMessages(){
+        val fromId = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId")
+        ref.addChildEventListener(object: ChildEventListener{
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                val message = p0.getValue(Message::class.java) ?: return
+                latestMessagesMap[p0.key!!] = message
+                refreshRecycler()
+                adapter.add(LatestMessagesRow(message))
+            }
+            override fun onChildRemoved(p0: DataSnapshot) {}
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                val message = p0.getValue(Message::class.java) ?: return
+                latestMessagesMap[p0.key!!] = message
+                refreshRecycler()
+                adapter.add(LatestMessagesRow(message))
+            }
+        })
+        recyclerView_latest_messages.adapter = adapter
+    }
+
+    class LatestMessagesRow(val chatMessage: Message): Item<ViewHolder>() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
+            viewHolder.itemView.message_textView_latest_messages_row.text = chatMessage.text
+
         }
 
         override fun getLayout(): Int {
@@ -45,15 +77,6 @@ class LatestMessegesActivity : AppCompatActivity() {
         }
     }
 
-    private fun dummy(){
-        val adapter = GroupAdapter<ViewHolder>()
-        adapter.add(LatestMessagesRow())
-        adapter.add(LatestMessagesRow())
-        adapter.add(LatestMessagesRow())
-        adapter.add(LatestMessagesRow())
-        adapter.add(LatestMessagesRow())
-        recyclerView_latest_messages.adapter = adapter
-    }
 
     private fun fetchCurrentUser(){
         val uid = FirebaseAuth.getInstance().uid
@@ -92,7 +115,7 @@ class LatestMessegesActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun verifyIfUserIsLogged(){
+    private fun verifyIfUserIsLogged(){
         val uid = FirebaseAuth.getInstance().uid
         if(uid == null){
             val intent = Intent(this, RegisterActivity::class.java)
@@ -100,5 +123,4 @@ class LatestMessegesActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 }
