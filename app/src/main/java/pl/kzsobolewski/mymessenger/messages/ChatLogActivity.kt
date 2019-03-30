@@ -45,16 +45,18 @@ class ChatLogActivity : AppCompatActivity() {
         val toId = toUser?.uid
         val ref = FirebaseDatabase.getInstance()
                 .getReference("/user-messages/$fromId/$toId")
-
+        var isFirstMessage = true
         ref.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 val message = p0.getValue(Message::class.java)
                 Log.d(CHATLOG_TAG, "message sent: " + message?.text)
                 if(message != null) {
-                    if (message.fromId == FirebaseAuth.getInstance().uid)
+                    if (message.fromId == FirebaseAuth.getInstance().uid) {
                         adapter.add(YourChatItem(message.text))
-                    else {
-                        adapter.add(SomeoneChatItem(message.text,toUser!!))
+                        isFirstMessage= true
+                    }else {
+                        adapter.add(SomeoneChatItem(message.text,toUser!!,isFirstMessage))
+                        isFirstMessage = false
                     }
                 }
 
@@ -106,17 +108,20 @@ class ChatLogActivity : AppCompatActivity() {
 }
 
 
-class SomeoneChatItem(val text:String, val user: User): Item<ViewHolder>(){
+class SomeoneChatItem(val text:String, val user: User, val isNew: Boolean): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.from_text_chatrow.text = text
         val uri = user.profileImageUrl
-        val avatar_imgView = viewHolder.itemView.avatar_chatrow
-        Picasso.get().load(uri).into(avatar_imgView)
+        if(isNew) {
+            var avatar_imgView = viewHolder.itemView.avatar_chatrow
+            Picasso.get().load(uri).into(avatar_imgView)
+        }
     }
     override fun getLayout(): Int {
         return R.layout.chat_row_someone
     }
 }
+
 class YourChatItem(val text:String): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.your_text_chatrow.text = text

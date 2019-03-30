@@ -7,14 +7,14 @@
     android:layout_height="wrap_content"
    >
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/avatar_chatrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/from_text_chatrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/from_text_chatrow"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView
@@ -22,11 +22,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/rounded_edittext"
+        android:maxWidth="300dp"
         android:padding="@dimen/mtrl_bottomappbar_fab_cradle_rounded_corner_radius"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/avatar_chatrow"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatar_chatrow"
-        app:layout_constraintTop_toTopOf="@+id/avatar_chatrow" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

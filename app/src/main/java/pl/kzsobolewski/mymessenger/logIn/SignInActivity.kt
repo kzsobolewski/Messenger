@@ -1,11 +1,13 @@
 package pl.kzsobolewski.mymessenger.logIn
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import pl.kzsobolewski.mymessenger.R
+import pl.kzsobolewski.mymessenger.messages.LatestMessegesActivity
 
 
 class SignInActivity : AppCompatActivity() {
@@ -28,6 +30,9 @@ class SignInActivity : AppCompatActivity() {
                             Toast.makeText(this, "couldn't log in", Toast.LENGTH_SHORT).show()
                             return@addOnCompleteListener
                         }
+                        val intent = Intent(this, LatestMessegesActivity::class.java)
+                        startActivity(intent)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         Toast.makeText(this, "logged in", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener{

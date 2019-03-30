@@ -32,7 +32,7 @@ class LatestMessegesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_latest_messeges)
+                setContentView(R.layout.activity_latest_messeges)
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(this, ChatLogActivity::class.java)
             val row = item as LatestMessagesRow
@@ -42,6 +42,10 @@ class LatestMessegesActivity : AppCompatActivity() {
         listenForLatestMessages()
         fetchCurrentUser()
         verifyIfUserIsLogged()
+        add_fab_latest_mesaages.setOnClickListener{
+            val intent = Intent(this, NewMessageActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun refreshRecycler(){
@@ -124,11 +128,6 @@ class LatestMessegesActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
-            R.id.new_message_menu -> {
-                val intent = Intent(this, NewMessageActivity::class.java)
-                startActivity(intent)
-                return true
-            }
             R.id.signout_message_menu -> {
                 val intent  = Intent(this, RegisterActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)

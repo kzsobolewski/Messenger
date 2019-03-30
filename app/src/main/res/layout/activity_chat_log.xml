@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context=".messages.ChatLogActivity">
+
 
     <Button
         android:id="@+id/send_button_chatlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:background="@drawable/rounded_button"
         android:text="Send"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:hint="Type something"
         app:layout_constraintBottom_toBottomOf="@+id/send_button_chatlog"
         app:layout_constraintEnd_toStartOf="@+id/send_button_chatlog"
@@ -32,10 +35,14 @@
         android:id="@+id/messages_recyclerview_chatlog"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/background_color"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/send_button_chatlog"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>
