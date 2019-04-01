@@ -39,7 +39,7 @@ class NewMessageActivity : AppCompatActivity() {
                 val adapter = GroupAdapter<ViewHolder>()
 
                 p0.children.forEach {
-                    Log.d("NewMessageActivity", "fetching user data form FB"+it.toString())
+                    Log.d("NewMessageActivity", "Fetching user data form FB"+it.toString())
                     val user = it.getValue(User::class.java)
                     if(user != null)
                         adapter.add(UserItem(user))
