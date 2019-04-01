@@ -4,6 +4,5 @@
     <corners android:radius="@dimen/radiusForRoundedImg"/>
     <stroke android:color="@color/img_border_color"
         android:width="8dp"/>
-    <solid android:color="#e5ffff"/>
 
 </shape>

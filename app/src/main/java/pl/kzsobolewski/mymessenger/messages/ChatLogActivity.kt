@@ -96,7 +96,8 @@ class ChatLogActivity : AppCompatActivity() {
             edittext_chatlog.text.clear()
             messages_recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
         }
-        refOtherUser.setValue(message)
+        if(toId != fromId)
+            refOtherUser.setValue(message)
 
         val latestMessageRef = FirebaseDatabase.getInstance()
                 .getReference("/latest-messages/$fromId/$toId")
@@ -114,7 +115,9 @@ class SomeoneChatItem(val text:String, val user: User, val isNew: Boolean): Item
         val uri = user.profileImageUrl
         if(isNew) {
             var avatar_imgView = viewHolder.itemView.avatar_chatrow
-            Picasso.get().load(uri).into(avatar_imgView)
+            Picasso.get().load(uri).resize(100, 100)
+                    .centerCrop()
+                    .into(avatar_imgView)
         }
     }
     override fun getLayout(): Int {

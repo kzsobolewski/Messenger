@@ -9,6 +9,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/avatar_imageView_latest_messages_row"
+        app:civ_border_color="@color/colorAccent"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
@@ -23,17 +24,18 @@
     <TextView
         android:id="@+id/username_textView_latest_messages"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
-        android:text="username"
+        android:text="Username"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/avatar_imageView_latest_messages_row"
         app:layout_constraintTop_toTopOf="@+id/avatar_imageView_latest_messages_row" />
 
     <TextView
         android:id="@+id/message_textView_latest_messages_row"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
         android:text="message content"
         app:layout_constraintBottom_toBottomOf="@+id/avatar_imageView_latest_messages_row"
         app:layout_constraintStart_toStartOf="@+id/username_textView_latest_messages"

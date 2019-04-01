@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".logIn.SignInActivity">
+    tools:context=".logIn.SignInActivity"
+    android:background="@drawable/background_gradient">
 
     <EditText
         android:id="@+id/email_editText_signIn"
@@ -12,7 +13,7 @@
         android:layout_height="@dimen/textEditSize"
         android:layout_marginEnd="56dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="192dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -42,7 +43,7 @@
         android:id="@+id/login_button_signIn"
         android:layout_width="0dp"
         android:layout_height="@dimen/textEditSize"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/rounded_button"
         android:text="Log In"
         app:layout_constraintEnd_toEndOf="@+id/password_editText_signIn"

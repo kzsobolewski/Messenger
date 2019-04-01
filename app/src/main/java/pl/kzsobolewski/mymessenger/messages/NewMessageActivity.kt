@@ -71,7 +71,9 @@ class UserItem(val user: User):Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.username_textview_newmessagerow.text = user.username
 
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.user_imageview_newmessagerow)
+        Picasso.get().load(user.profileImageUrl).resize(100, 100)
+                .centerCrop()
+                .into(viewHolder.itemView.user_imageview_newmessagerow)
     }
 
     override fun getLayout(): Int {

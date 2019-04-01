@@ -78,6 +78,7 @@
         android:layout_marginTop="16dp"
         android:text="I accept the terms and conditions."
         android:textAlignment="center"
+        android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="@+id/passwordConfirm_editText_register"
         app:layout_constraintStart_toStartOf="@+id/passwordConfirm_editText_register"
         app:layout_constraintTop_toBottomOf="@+id/passwordConfirm_editText_register" />
@@ -103,6 +104,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Already have an account?"
+        android:textColor="@color/colorEditText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/register_button_register"
         app:layout_constraintStart_toStartOf="@+id/register_button_register"

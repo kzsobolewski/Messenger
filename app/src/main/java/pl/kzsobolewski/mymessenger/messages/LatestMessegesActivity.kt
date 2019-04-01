@@ -95,7 +95,8 @@ class LatestMessegesActivity : AppCompatActivity() {
                 override fun onDataChange(p0: DataSnapshot) {
                     otherUser = p0.getValue(User::class.java)
                     viewHolder.itemView.username_textView_latest_messages.text = otherUser?.username
-                    Picasso.get().load(otherUser?.profileImageUrl)
+                    Picasso.get().load(otherUser?.profileImageUrl).resize(100, 100)
+                            .centerCrop()
                             .into(viewHolder.itemView.avatar_imageView_latest_messages_row)
                 }
             })

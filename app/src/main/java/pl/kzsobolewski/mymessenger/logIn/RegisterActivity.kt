@@ -43,11 +43,7 @@ class RegisterActivity : AppCompatActivity() {
             val intent  = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
-
-
-
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
